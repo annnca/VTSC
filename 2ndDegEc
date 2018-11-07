@@ -1,0 +1,150 @@
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
+
+int main()
+{
+    char ach[50], bch[50], cch[50];
+    double a, b, c, d, x1, x2;
+    int astart,bstart,cstart;
+    astart = bstart = cstart = 0;
+
+    printf("Enter coefficient a:");
+    scanf("%s",ach);
+    printf("Enter coefficient b: ");
+    scanf("%s",bch);
+    printf("Enter coefficient c: ");
+    scanf("%s",cch);
+
+    char cifre[] = "0123456789";
+
+    int i;
+
+    if(ach[0] == '-'){
+        astart = 1;
+    }
+    if(bch[0] == '-'){
+        bstart = 1;
+    }
+    if(cch[0] == '-'){
+        cstart = 1;
+    }
+
+    for(i= astart ; i<strlen(ach); i++){
+        if(strchr(cifre, ach[i]) == NULL){
+            printf("a nu este numar.");
+            return;
+        }
+    }
+
+    for(i= bstart ; i<strlen(bch); i++){
+        if(strchr(cifre, bch[i]) == NULL){
+            printf("b nu este numar.");
+            return;
+        }
+    }
+
+    for(i= cstart ; i<strlen(cch); i++){
+        if(strchr(cifre, cch[i]) == NULL){
+            printf("c nu este numar.");
+            return;
+        }
+    }
+
+    a = atof(ach);
+    if(a == 0){
+        printf("ecuatia nu este de gradul 2 ");
+        return;
+    }
+    else if(a >= 10000 || a < 0 )
+    {
+        printf("a nu este in domeniu ");
+        return;
+    }
+    if(a - int(a) != 0){
+        printf("a nu este intreg");
+    }
+
+    b = atof(bch);
+    if(b >= 10000 || b < 0 )
+    {
+        printf("b nu este in domeniu ");
+        return;
+    }
+    c = atof(cch);
+    if(c >= 10000|| c < 0 )
+    {
+        printf("c nu este in domeniu ");
+        return;
+    }
+
+    d = b*b-4*a*c;
+
+    // condition for real and different roots
+    if (d > 0)
+    {
+    // sqrt() function returns square root
+        x1 = (-b+sqrt(d))/(2*a);
+        if(x1 >= 100 || x1 <-10)
+    {
+        printf("x1 nu este in domeniu ");
+        return;
+    }
+        int y1 = (int)x1*100;
+
+        if(y1 % 100 == 0){
+            printf("x1 = %.0f", x1);
+        }else if(y1 % 10 == 0){
+            printf("x1 = %.1f", x1);
+        } else
+        printf("x1 = %.2f", x1);
+
+
+        x2 = (-b-sqrt(d))/(2*a);
+                if(x2 >= 1000 || x2 <-10)
+    {
+        printf("x2 nu este in domeniu ");
+        return;
+    }
+         int y2 = (int)x2*100;
+
+        if(y2 % 100 == 0){
+            printf("x2 = %.0f", x2);
+        }else if(y2 % 10 == 0){
+            printf("x2 = %.1f", x2);
+        }else
+        printf("x2 = %.2f", x2);
+
+    }
+
+    //condition for real and equal roots
+    else if (d == 0)
+
+    {
+        x1 = x2 = -b/(2*a);
+                        if(x1 >= 1000 || x1 <-10)
+    {
+        printf("x1 nu este in domeniu ");
+        return;
+    }
+
+        int y1 = (int)x1*100;
+
+        if(y1 % 100 == 0){
+            printf("%.0f", x1);
+        }else if(y1 % 10 == 0){
+            printf("x1 = x2= %.1f", x1);
+        }
+        else
+        printf("x1 = %.2f", x1);
+
+    }
+
+    // if roots are not real
+    else
+    {
+        printf("ecuatia nu are solutii reale");
+    }
+
+    return 0;
+}
